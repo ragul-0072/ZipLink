@@ -4,11 +4,9 @@ import {
   signInWithEmailAndPassword, 
   signInWithPopup, 
   GoogleAuthProvider,
-  sendPasswordResetEmail // NEW: Import reset function
+  sendPasswordResetEmail 
 } from "firebase/auth";
 import { auth } from './firebase';
-
-// Initialize the Google Auth Provider
 const googleProvider = new GoogleAuthProvider();
 
 const Auth = () => {
@@ -17,7 +15,7 @@ const Auth = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null); // NEW: State for success messages
+  const [successMessage, setSuccessMessage] = useState(null); 
 
   const switchMode = () => {
     setIsLogin(prev => !prev);
@@ -62,7 +60,7 @@ const Auth = () => {
     }
   };
   
-  // NEW: Function to handle password reset email
+  
   const handleForgotPassword = async () => {
       // Check if email field is empty before attempting reset
       if (!email) {
@@ -90,8 +88,7 @@ const Auth = () => {
 
   return (
     <div className="container auth-container">
-      {/* Logo and App Name */}
-      <div className="logo-header">
+       <div className="logo-header">
         <img 
           src="/ZipLink_logo.jpg" 
           alt="ZipLink Logo" 
@@ -101,8 +98,6 @@ const Auth = () => {
       </div>
       
       <h3>{title}</h3>
-      
-      {/* Main Auth Form */}
       <form onSubmit={handleAuth}>
         <input
           type="email"
@@ -112,7 +107,6 @@ const Auth = () => {
           required
         />
         
-        {/* Only show password field for sign in/up (hide when sending reset email) */}
         {!successMessage && (
             <input
                 type="password"
@@ -123,7 +117,6 @@ const Auth = () => {
             />
         )}
         
-        {/* Forgot Password Link - Only visible on Login mode */}
         {isLogin && !successMessage && (
             <a className="forgot-password-link" onClick={handleForgotPassword}>
                 Forgot Password?
@@ -135,7 +128,6 @@ const Auth = () => {
         </button>
       </form>
 
-      {/* Google Sign-In Button */}
       {!successMessage && (
         <>
             <div className="social-login-divider">OR</div>

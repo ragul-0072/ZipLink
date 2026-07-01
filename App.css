@@ -1,35 +1,22 @@
-/* --- UNIVERSAL SETUP --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-/* * CRITICAL FIX: Make the page scrollable
- * We remove `display: flex`, `justify-content`, and `align-items` from the body.
- * This lets the body behave as a normal document, allowing it to grow and scroll.
- * We add `min-height: 100vh` to ensure the gradient background always fills the screen.
-*/
 body {
-  /* --- NEW FONT --- */
+
   font-family: 'Inter', sans-serif;
   
-  /* --- NEW BACKGROUND (STATIC) --- */
-  background-color: #0d1e3d; /* Fallback color */
+  background-color: #0d1e3d; 
   background-image: url('/bg.jpg'); 
   background-position: center center;
   background-size: cover;
-  background-attachment: fixed; /* Keeps BG static on scroll */
+  background-attachment: fixed;
   
-  /* --- NEW BASE COLORS (Enhanced Contrast) --- */
-  color: #e0e7ee; /* Lighter, slightly desaturated blue-grey for main text */
-  margin: 0;
+  color: #e0e7ee; 
   padding: 0;
   min-height: 100vh;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-}
+  overflow-x: hidden;
 
-/* --- CONTAINER STYLING --- */
-/* --- STRONG CONTRAST FIX "DARK GLASS" THEME --- */
 .container {
-  /* This is the new dark, semi-transparent background for high contrast */
-  background: rgba(13, 30, 61, 0.7); /* Dark Blue-Grey Glass */
+  background: rgba(13, 30, 61, 0.7); 
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border-radius: 16px;
@@ -46,8 +33,6 @@ body {
   animation: fadeIn 1s ease-in-out;
   margin: 40px auto;
   box-sizing: border-box;
-  
-  /* --- NEW HOVER ANIMATION --- */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -58,7 +43,6 @@ body {
     0 0 0 1px rgba(255, 255, 255, 0.2); 
 }
 
-/* This is a MODIFIER class for the dashboard to make it wider */
 .container.dashboard-view {
   max-width: 1200px;
   width: 95%;
@@ -76,13 +60,12 @@ body {
   }
 }
 
-/* --- LOGO, HEADER, & TYPOGRAPHY --- */
 h1, .logo-header h2, .auth-container h2 {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 2.5em;
   margin-bottom: 20px;
-  color: #ffffff; /* Pure white for main headings */
+  color: #ffffff; 
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
 }
 
@@ -91,7 +74,7 @@ h1, .logo-header h2, .auth-container h2 {
   font-weight: 600;
   font-size: 1.8em;
   margin-bottom: 25px;
-  color: #f8fcfd; /* Very light, almost white blue */
+  color: #f8fcfd;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -141,13 +124,12 @@ h1, .logo-header h2, .auth-container h2 {
 
 .app-tagline {
   font-size: 1.1em;
-  color: #c5d9e8; /* Text now pops on the dark container */
+  color: #c5d9e8; 
   margin-top: 0;
   margin-bottom: 25px;
   font-weight: 400;
 }
 
-/* --- FORMS, INPUTS, & BUTTONS (Shared) --- */
 form {
   display: flex;
   flex-direction: column;
@@ -165,7 +147,7 @@ input {
   padding: 18px 20px;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.4); 
-  background-color: rgba(0, 0, 0, 0.4); /* Darker input */
+  background-color: rgba(0, 0, 0, 0.4);
   color: #ffffff; 
   font-size: 1.1em;
   transition: all 0.3s ease;
@@ -180,20 +162,15 @@ input:focus {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4), inset 0 1px 4px rgba(0, 0, 0, 0.3);
-  /* --- NEW FOCUS ANIMATION --- */
-  transform: scale(1.02);
+ transform: scale(1.02);
 }
 
-/* --- NEW: Calendar (datetime-local) Input Styling --- */
 input[type="datetime-local"] {
-  /* This tells the browser to use the dark-mode version of the calendar popup */
   color-scheme: dark;
-  padding-right: 10px; /* Add some space for the icon */
+  padding-right: 10px;
 }
-
-/* Style the little calendar icon to be white */
 ::-webkit-calendar-picker-indicator {
-  filter: invert(1); /* Simple trick to turn the black icon white */
+  filter: invert(1); 
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -204,8 +181,6 @@ input[type="datetime-local"] {
   transform: scale(1.1);
 }
 
-
-/* Base button style */
 button {
   padding: 18px 30px;
   border: none;
@@ -230,7 +205,6 @@ button {
 button:hover {
   color: #fff;
   background: #0056b3; 
-  /* --- NEW HOVER ANIMATION --- */
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 8px 25px rgba(0, 123, 255, 0.5);
 }
@@ -244,7 +218,6 @@ button:disabled {
   opacity: 0.6;
 }
 
-/* Button variants */
 .view-switch-button,
 .logout-button {
   font-size: 0.9em;
@@ -259,7 +232,6 @@ button:disabled {
 .logout-button:hover {
   background: rgba(255, 255, 255, 0.3);
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
-  /* --- NEW HOVER ANIMATION --- */
   transform: translateY(-2px) scale(1.05);
 }
 
@@ -271,7 +243,7 @@ button:disabled {
 }
 .advanced-options-toggle:hover {
   background: rgba(0, 0, 0, 0.4);
-  transform: scale(1.03); /* --- NEW HOVER ANIMATION --- */
+  transform: scale(1.03);
 }
 
 .google-sign-in-button {
@@ -284,7 +256,7 @@ button:disabled {
 .google-sign-in-button:hover {
   background: #f0f0f0; 
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-  transform: translateY(-2px) scale(1.03); /* --- NEW HOVER ANIMATION --- */
+  transform: translateY(-2px) scale(1.03); 
 }
 
 .google-icon {
@@ -293,7 +265,6 @@ button:disabled {
   margin-right: 15px;
 }
 
-/* --- AUTH PAGE --- */
 .auth-container form {
   gap: 15px;
 }
@@ -345,7 +316,6 @@ button:disabled {
   transform: scale(1.1);
 }
 
-/* --- SHORTENER PAGE --- */
 .advanced-options-container {
   display: flex;
   flex-direction: column;
@@ -358,7 +328,7 @@ button:disabled {
 
 .result {
   margin-top: 30px;
-  background-color: rgba(0, 0, 0, 0.4); /* Darker */
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 10px;
   padding: 25px;
   word-wrap: break-word;
@@ -412,13 +382,6 @@ button:disabled {
   50% { transform: translateX(5px); }
   75% { transform: translateX(-5px); }
 }
-
-/* * ===================================================================
- * --- DASHBOARD PAGE (NEW & UPGRADED) ---
- * ===================================================================
-*/
-
-/* --- NEW: Stats Section --- */
 .dashboard-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -427,13 +390,12 @@ button:disabled {
 }
 
 .stat-card {
-  background: rgba(0, 0, 0, 0.25); /* Darker */
+  background: rgba(0, 0, 0, 0.25); 
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   padding: 20px;
   text-align: center;
-  /* --- NEW HOVER ANIMATION --- */
-  transition: all 0.3s ease;
+ transition: all 0.3s ease;
 }
 
 .stat-card:hover {
@@ -460,7 +422,6 @@ button:disabled {
   line-height: 1;
 }
 
-/* --- NEW: Header Controls (Search + Create) --- */
 .dashboard-header-controls {
   display: flex;
   flex-direction: column;
@@ -483,10 +444,9 @@ button:disabled {
 .create-link-button-header:hover {
   background: #138496;
   box-shadow: 0 6px 20px rgba(23, 162, 184, 0.5);
-  transform: translateY(-2px) scale(1.03); /* --- NEW HOVER ANIMATION --- */
+  transform: translateY(-2px) scale(1.03);
 }
 
-/* --- General Dashboard Messages --- */
 .dashboard-message {
   text-align: center;
   font-size: 1.2em;
@@ -507,7 +467,7 @@ button:disabled {
   height: auto;
 }
 
-/* --- UPGRADED: Table --- */
+
 .links-table-container {
   overflow-x: auto;
   width: 100%;
@@ -540,7 +500,7 @@ table th {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(4, 12, 29, 0.9); /* Very dark sticky header */
+  background: rgba(4, 12, 29, 0.9); 
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   font-weight: 600;
@@ -552,11 +512,10 @@ table th {
 
 table tr:hover {
   background-color: rgba(255, 255, 255, 0.08);
-  /* --- NEW HOVER ANIMATION --- */
   transform: scale(1.01);
 }
 
-/* Specific Column Styles for Desktop Table */
+
 table th:nth-child(1), table td:nth-child(1) { width: 15%; }
 table th:nth-child(2), table td:nth-child(2) { width: 35%; max-width: 300px; }
 table th:nth-child(3), table td:nth-child(3) { width: 8%; text-align: center; }
@@ -590,8 +549,6 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
   transform: scale(1.1);
   display: inline-block;
 }
-
-/* --- UPGRADED: Action Icons --- */
 .action-cell {
   text-align: center;
   white-space: nowrap;
@@ -613,7 +570,6 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
 
 .icon-button:hover {
   background: rgba(255, 255, 255, 0.15);
-  /* --- NEW HOVER ANIMATION --- */
   transform: scale(1.2);
 }
 
@@ -630,7 +586,7 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
   background: none;
 }
 
-/* Inline Delete Confirmation */
+
 .delete-confirm-box span {
   display: block;
   font-size: 0.9em;
@@ -645,9 +601,6 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
 }
 .delete-confirm-box button.confirm { background: #dc3545; color: #fff; }
 .delete-confirm-box button.cancel { background: #7a7a7a; }
-
-
-/* --- QR MODAL --- */
 .qr-modal-backdrop {
   position: fixed;
   top: 0;
@@ -700,8 +653,6 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
   font-size: 1em;
   height: auto;
 }
-
-/* --- LOADING SCREEN --- */
 .loading-screen {
   position: fixed;
   top: 0;
@@ -716,21 +667,11 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
   background: #0d1e3d;
   z-index: 1000;
 }
-
-/*
- * ===================================================================
- * --- MOBILE & TABLET OPTIMIZATION (max-width: 1023px) ---
- * ===================================================================
-*/
 @media (max-width: 1023px) {
-  
-  /* --- BASE --- */
   body {
     padding: 0;
   }
-
-  /* --- MOBILE POV FIX --- */
-  .container {
+ .container {
     width: 95%;
     max-width: 700px;
     margin: 20px auto;
@@ -742,20 +683,17 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
   }
   
   .container:hover {
-    transform: none; /* Disable lift on mobile */
+    transform: none; 
   }
   
   .container.auth-container {
     margin: 20px auto;
   }
 
-  /* --- TYPOGRAPHY --- */
   h1, .logo-header h2, .auth-container h2 { font-size: 2.2em; }
   .auth-container h3, .shortener-title, .dashboard-title { font-size: 1.8em; }
   .auth-logo { width: 80px; height: 80px; }
   .main-app-logo { width: 120px; }
-
-  /* --- HEADERS --- */
   .app-header {
     flex-direction: column;
     align-items: center;
@@ -768,7 +706,7 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
     gap: 10px;
   }
 
-  /* --- FORMS & BUTTONS --- */
+ 
   button,
   .google-sign-in-button,
   .view-switch-button,
@@ -785,7 +723,7 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
   }
   
   input:focus {
-    transform: scale(1.01); /* Less aggressive pop on mobile */
+    transform: scale(1.01); 
   }
 
   .shortener-area form,
@@ -795,8 +733,6 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
   }
   
   .auth-container form input { width: 100%; }
-
-  /* --- DASHBOARD: MOBILE --- */
   .container.dashboard-view {
     padding: 20px 10px;
   }
@@ -823,7 +759,6 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
     flex-direction: column;
   }
 
-  /* --- NEW: Mobile Card List Styles --- */
   .mobile-link-list {
     display: flex;
     flex-direction: column;
@@ -831,7 +766,7 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
   }
 
   .mobile-link-card {
-    background-color: rgba(0, 0, 0, 0.3); /* Darker */
+    background-color: rgba(0, 0, 0, 0.3);
     padding: 15px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -840,7 +775,7 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
   }
   
   .mobile-link-card:hover {
-    transform: scale(1.03); /* --- NEW HOVER ANIMATION --- */
+    transform: scale(1.03); 
     background-color: rgba(0, 0, 0, 0.4);
   }
 
@@ -921,13 +856,13 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
     gap: 8px;
     padding: 0 10px;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.15); /* Darker */
+    background: rgba(255, 255, 255, 0.15);
     color: #e0e7ee;
   }
   .mobile-link-card .icon-button:hover {
     background: rgba(255, 255, 255, 0.25);
     color: #ffffff;
-    transform: scale(1.05); /* --- NEW HOVER ANIMATION --- */
+    transform: scale(1.05);
   }
   
   .mobile-link-card .delete-confirm-box {
@@ -938,16 +873,8 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
   }
 
 }
-
-/*
- * ===================================================================
- * --- LARGE DESKTOP OPTIMIZATION (min-width: 1024px) ---
- * ===================================================================
-*/
 @media (min-width: 1024px) {
-
-  /* --- AUTH PAGE: 2-COLUMN INPUTS --- */
-  .auth-container form {
+ .auth-container form {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -963,9 +890,7 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
   .google-sign-in-button {
     width: 100%;
   }
-  
-  /* --- SHORTENER PAGE: REVERTED --- */
-  .shortener-area form {
+   .shortener-area form {
     flex-direction: row;
     align-items: stretch;
     gap: 15px;
@@ -999,7 +924,6 @@ table th:nth-child(6), table td:nth-child(6) { width: 12%; text-align: center; }
     gap: 15px;
   }
   
-  /* --- DASHBOARD: DESKTOP --- */
   .dashboard-header-controls {
     flex-direction: row;
     justify-content: space-between;

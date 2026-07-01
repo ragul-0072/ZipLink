@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-
-// --- Modern SVG Icons ---
-// We define these as components for easy reuse and clean code
 const IconCopy = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -25,10 +22,6 @@ const IconDelete = () => (
     <line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line>
   </svg>
 );
-// --- End of Icons ---
-
-// --- NEW: Viewport Hook ---
-// This simple hook detects the screen width
 const useViewport = () => {
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -40,9 +33,6 @@ const useViewport = () => {
 
   return { width };
 };
-// --- End of Viewport Hook ---
-
-
 const Dashboard = ({ currentUser, handleLogout, setCurrentView }) => {
   const [links, setLinks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -51,12 +41,8 @@ const Dashboard = ({ currentUser, handleLogout, setCurrentView }) => {
   const [qrModal, setQrModal] = useState({ visible: false, url: '', code: '' });
   const [confirmDeleteId, setConfirmDeleteId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  
-  // NEW: Get viewport width
   const { width } = useViewport();
-  const isMobile = width < 1024; // We'll use the same 1024px breakpoint as CSS
-
-  // --- Utility Functions ---
+  const isMobile = width < 1024; 
   const formatLinkDate = (dateStr) => {
     if (!dateStr) return 'Never';
     const dateObj = new Date(dateStr);
@@ -67,7 +53,7 @@ const Dashboard = ({ currentUser, handleLogout, setCurrentView }) => {
     });
   };
 
-  // --- Data Fetching ---
+
   const fetchLinks = async () => {
     if (!currentUser || !currentUser.uid) {
       setLoading(false);
@@ -96,7 +82,7 @@ const Dashboard = ({ currentUser, handleLogout, setCurrentView }) => {
     fetchLinks();
   }, [currentUser]);
 
-  // --- Event Handlers ---
+ 
   const handleDelete = async (id, shortCode) => {
     setConfirmDeleteId(null);
     setDeleteStatus(prev => ({ ...prev, [id]: true }));
@@ -131,7 +117,7 @@ const Dashboard = ({ currentUser, handleLogout, setCurrentView }) => {
         }, 1500);
       });
     } catch (err) {
-      // Fallback
+
       try {
         const el = document.createElement('textarea');
         el.value = shortUrl;
@@ -153,7 +139,6 @@ const Dashboard = ({ currentUser, handleLogout, setCurrentView }) => {
     }
   };
 
-  // --- QR Code Logic (FIXED) ---
   const generateQr = (url) => {
     const qrDiv = document.getElementById('qrcode');
     if (qrDiv) { // Safety check
@@ -168,16 +153,14 @@ const Dashboard = ({ currentUser, handleLogout, setCurrentView }) => {
     }
   };
 
-  // MODIFIED: showQrCode just sets the state
   const showQrCode = (url, code) => {
     setQrModal({ visible: true, url, code });
-    // We no longer call generateQr() here
   };
 
-  // NEW: useEffect hook to run AFTER render
+ 
   useEffect(() => {
     if (qrModal.visible) {
-      // Now we know the modal (and div#qrcode) exists
+      
       if (window.QRCode) {
         generateQr(qrModal.url);
       } else {
@@ -187,19 +170,14 @@ const Dashboard = ({ currentUser, handleLogout, setCurrentView }) => {
         document.body.appendChild(script);
       }
     }
-  }, [qrModal.visible, qrModal.url]); // Re-run if the modal becomes visible or URL changes
-  // --- End QR Code Fix ---
+  }, [qrModal.visible, qrModal.url]); 
 
-
-  // --- Derived State ---
   const filteredLinks = links.filter(link =>
     (link.long_url && link.long_url.toLowerCase().includes(searchTerm.toLowerCase())) ||
     (link.short_code && link.short_code.toLowerCase().includes(searchTerm.toLowerCase()))
   );
   const totalLinks = links.length;
   const totalClicks = links.reduce((acc, link) => acc + (link.clicks || 0), 0);
-
-  // --- Render Functions ---
   const dashboardContent = () => {
     if (loading) {
       return <p className="dashboard-message">Loading your links...</p>;
@@ -222,8 +200,7 @@ const Dashboard = ({ currentUser, handleLogout, setCurrentView }) => {
       );
     }
     
-    // --- NEW: Conditional Rendering ---
-    // Pass all props down to the view components
+    
     const viewProps = {
       links: filteredLinks,
       confirmDeleteId,
@@ -301,8 +278,6 @@ const Dashboard = ({ currentUser, handleLogout, setCurrentView }) => {
   );
 };
 
-// --- NEW: Desktop View Component ---
-// This contains your original, unchanged table layout
 const DashboardDesktopView = ({ links, confirmDeleteId, setConfirmDeleteId, handleDelete, deleteStatus, copyLink, showQrCode, formatLinkDate }) => (
   <div className="links-table-container">
     <table>
@@ -360,8 +335,6 @@ const DashboardDesktopView = ({ links, confirmDeleteId, setConfirmDeleteId, hand
   </div>
 );
 
-// --- NEW: Mobile View Component ---
-// This is a new, custom DIV-based layout for mobile
 const DashboardMobileView = ({ links, confirmDeleteId, setConfirmDeleteId, handleDelete, deleteStatus, copyLink, showQrCode, formatLinkDate }) => (
   <div className="mobile-link-list">
     {links.map((link) => (

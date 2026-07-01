@@ -4,8 +4,6 @@ import './App.css';
 import Auth from './Auth.jsx';
 import Dashboard from './Dashboard.jsx';
 import { auth } from './firebase.js';
-
-// Key for saving view preference
 const VIEW_STORAGE_KEY = 'ziplink_current_view';
 
 function App() {
@@ -18,7 +16,7 @@ function App() {
   const [error, setError] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
-  const [showAdvancedOptions, setShowAdvancedOptions] = useState(false); // NEW: State for advanced options toggle
+  const [showAdvancedOptions, setShowAdvancedOptions] = useState(false); 
 
   const initialView = localStorage.getItem(VIEW_STORAGE_KEY) || 'shortener';
   const [currentView, setCurrentView] = useState(initialView);
@@ -88,7 +86,6 @@ function App() {
 
       const data = await response.json();
       setShortUrl(data.shortUrl);
-      // Clear fields and hide advanced options on success
       setCustomAlias('');
       setLongUrl('');
       setLinkPassword('');
@@ -145,7 +142,6 @@ function App() {
         <h2 className="shortener-title">Shorten Your URL</h2>
 
         <form onSubmit={handleSubmit}>
-          {/* Main URL input is always visible */}
           <div className="input-group">
             <input
               type="url"
@@ -155,8 +151,6 @@ function App() {
               required
             />
           </div>
-
-          {/* NEW: Toggle button for advanced options */}
           <button
             type="button"
             className="advanced-options-toggle"
@@ -164,8 +158,6 @@ function App() {
           >
             {showAdvancedOptions ? 'Hide Advanced Options' : 'Advanced Options...'}
           </button>
-
-          {/* NEW: Conditionally rendered container for optional inputs */}
           {showAdvancedOptions && (
             <div className="advanced-options-container">
               <div className="input-group">
